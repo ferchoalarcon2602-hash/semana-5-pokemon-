@@ -1,0 +1,109 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenadores | Pokémon World</title>
+    <link rel="stylesheet" href="{% static 'pokemoing/estilos.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="{% url 'index' %}" class="logo">POKÉMON<span>WORLD</span></a>
+
+    <nav>
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'pokemo' %}">Pokémon</a>
+        <a href="{% url 'entrenadores' %}" class="activo">Entrenadores</a>
+        <a href="{% url 'gimnasios' %}">Gimnasios</a>
+    </nav>
+</header>
+
+<main class="contenido">
+
+    <div class="titulo-seccion">
+        <div>
+            <span class="subtitulo">MAESTROS POKÉMON</span>
+            <h2>Entrenadores 🎒</h2>
+            <p>Administra los entrenadores de tu mundo Pokémon.</p>
+        </div>
+
+        <a href="{% url 'crear_entrenador' %}" class="btn-agregar">
+            + Agregar entrenador
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for mensaje in messages %}
+            <div class="mensaje">{{ mensaje }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="pokemon-grid">
+
+        {% for objeto in objetos %}
+
+        <article class="pokemon-card entrenador-card">
+
+            <div class="card-imagen entrenador-imagen">
+                <span class="icono-entrenador">🎒</span>
+            </div>
+
+            <div class="card-info">
+
+                <h3>{{ objeto.nombre }} {{ objeto.apellido }}</h3>
+
+                <p class="habilidad">
+                    Entrenador Pokémon
+                </p>
+
+                <div class="card-datos">
+
+                    <div>
+                        <small>DOCUMENTO</small>
+                        <strong>{{ objeto.id_documento }}</strong>
+                    </div>
+
+                    <div>
+                        <small>POKÉMON</small>
+                        <strong>{{ objeto.lista_pokemones.count }}</strong>
+                    </div>
+
+                    <div>
+                        <small>MEDALLAS</small>
+                        <strong>{{ objeto.medallas.count }}</strong>
+                    </div>
+
+                </div>
+
+                <div class="acciones">
+
+                    <a href="{% url 'editar_entrenador' objeto.pk %}"
+                       class="btn-editar">Editar</a>
+
+                    <a href="{% url 'eliminar_entrenador' objeto.pk %}"
+                       class="btn-borrar">Eliminar</a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% empty %}
+
+        <div class="vacio">
+            <h2>🎒 No hay entrenadores registrados</h2>
+            <p>Agrega tu primer entrenador.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>

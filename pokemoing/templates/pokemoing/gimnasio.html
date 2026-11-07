@@ -1,0 +1,109 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasios | Pokémon World</title>
+    <link rel="stylesheet" href="{% static 'pokemoing/estilos.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="{% url 'index' %}" class="logo">POKÉMON<span>WORLD</span></a>
+
+    <nav>
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'pokemo' %}">Pokémon</a>
+        <a href="{% url 'entrenadores' %}">Entrenadores</a>
+        <a href="{% url 'gimnasios' %}" class="activo">Gimnasios</a>
+    </nav>
+</header>
+
+<main class="contenido">
+
+    <div class="titulo-seccion">
+        <div>
+            <span class="subtitulo">LÍDERES Y DESAFÍOS</span>
+            <h2>Gimnasios 🏆</h2>
+            <p>Administra los gimnasios y sus medallas.</p>
+        </div>
+
+        <a href="{% url 'crear_gimnasio' %}" class="btn-agregar">
+            + Agregar gimnasio
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for mensaje in messages %}
+            <div class="mensaje">{{ mensaje }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="pokemon-grid">
+
+        {% for objeto in objetos %}
+
+        <article class="pokemon-card gimnasio-card">
+
+            <div class="card-imagen gimnasio-imagen">
+                <span class="icono-gimnasio">🏆</span>
+            </div>
+
+            <div class="card-info">
+
+                <h3>{{ objeto.lider_del_gym }}</h3>
+
+                <p class="habilidad">
+                    Líder del gimnasio
+                </p>
+
+                <div class="card-datos">
+
+                    <div>
+                        <small>ELEMENTO</small>
+                        <strong>{{ objeto.get_elemnto_del_gym_display }}</strong>
+                    </div>
+
+                    <div>
+                        <small>MEDALLA</small>
+                        <strong>{{ objeto.medallas }}</strong>
+                    </div>
+
+                    <div>
+                        <small>ENTRENADORES</small>
+                        <strong>{{ objeto.entrenadores.count }}</strong>
+                    </div>
+
+                </div>
+
+                <div class="acciones">
+
+                    <a href="{% url 'editar_gimnasio' objeto.pk %}"
+                       class="btn-editar">Editar</a>
+
+                    <a href="{% url 'eliminar_gimnasio' objeto.pk %}"
+                       class="btn-borrar">Eliminar</a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% empty %}
+
+        <div class="vacio">
+            <h2>🏆 No hay gimnasios registrados</h2>
+            <p>Agrega tu primer gimnasio.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>

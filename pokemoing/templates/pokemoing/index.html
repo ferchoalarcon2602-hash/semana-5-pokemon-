@@ -1,0 +1,292 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pokémon World | Pokédex</title>
+
+    <link rel="stylesheet" href="{% static 'pokemoing/estilos.css' %}">
+</head>
+
+<body>
+
+    <!-- MENU PRINCIPAL -->
+    <header class="navbar">
+
+        <a href="{% url 'index' %}" class="logo">
+            POKÉMON<span>WORLD</span>
+        </a>
+
+        <nav>
+            <a href="{% url 'index' %}" class="activo">Inicio</a>
+            <a href="{% url 'pokemo' %}">Pokémon</a>
+            <a href="{% url 'entrenadores' %}">Entrenadores</a>
+            <a href="{% url 'gimnasios' %}">Gimnasios</a>
+            <a href="{% url 'pokemon' %} " class="boton-crear">
+                Buscar pokemon</a>
+        </nav>
+
+        <a href="#agregar" class="btn-nav">+ Agregar Pokémon</a>
+
+    </header>
+
+
+    <!-- PORTADA -->
+    <section class="hero">
+
+        <div class="hero-texto">
+
+            <span class="etiqueta">✦ BIENVENIDO A TU POKÉDEX</span>
+
+            <h1>
+                ¡ATRÁPALOS<br>
+                <span>A TODOS!</span>
+            </h1>
+
+            <p>
+                Descubre, colecciona y administra tus Pokémon.
+                Construye tu propio equipo y conviértete en
+                el mejor entrenador.
+            </p>
+
+            <a href="#coleccion" class="btn-principal">
+                Explorar colección →
+            </a>
+
+        </div>
+
+        <div class="hero-imagen">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                 alt="Pikachu">
+        </div>
+
+        <div class="decoracion">POKÉDEX</div>
+
+    </section>
+
+
+    <!-- ESTADISTICAS -->
+    <section class="estadisticas">
+
+        <div class="stat-card">
+            <span>⚡</span>
+            <div>
+                <h2>{{ pokemones.count }}</h2>
+                <p>Pokémon registrados</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span>🎒</span>
+            <div>
+                <h2>{{ entrenadores.count }}</h2>
+                <p>Entrenadores</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span>🏆</span>
+            <div>
+                <h2>{{ gimnasios.count }}</h2>
+                <p>Gimnasios</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- COLECCION -->
+    <main class="contenido" id="coleccion">
+
+        <div class="titulo-seccion">
+
+            <div>
+                <span class="subtitulo">TU AVENTURA COMIENZA AQUÍ</span>
+                <h2>Mis Pokémon <span>✦</span></h2>
+                <p>Explora todos los Pokémon de tu colección.</p>
+            </div>
+
+            <a href="#agregar" class="btn-agregar">
+                + Nuevo Pokémon
+            </a>
+
+        </div>
+
+
+        <!-- MENSAJES -->
+        {% if messages %}
+            {% for mensaje in messages %}
+                <div class="mensaje">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <!-- TARJETAS -->
+        <div class="pokemon-grid">
+
+            {% for p in pokemones %}
+
+                <article class="pokemon-card">
+
+                    <div class="card-imagen">
+
+                        <span class="numero">
+                            #{{ forloop.counter|stringformat:"03d" }}
+                        </span>
+
+                        <span class="tipo">
+                            {{ p.get_naturaleza_display }}
+                        </span>
+
+                        <img src="{{ p.imagen }}"
+                             alt="{{ p.nombre }}"
+                             loading="lazy">
+
+                    </div>
+
+                    <div class="card-info">
+
+                        <h3>{{ p.nombre }}</h3>
+
+                        <p class="habilidad">
+                            {{ p.habilidades }}
+                        </p>
+
+                        <p class="descripcion">
+                            {{ p.descripcion }}
+                        </p>
+
+                        <div class="card-datos">
+
+                            <div>
+                                <small>PESO</small>
+                                <strong>{{ p.peso }} kg</strong>
+                            </div>
+
+                            <div>
+                                <small>ENTRENADOR</small>
+                                <strong>{{ p.entrenador.nombre }}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="vacio">
+                    <h2>⚡ ¡Tu Pokédex está vacía!</h2>
+                    <p>Agrega tu primer Pokémon y comienza tu aventura.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+    <!-- FORMULARIO PARA AGREGAR -->
+    <section class="formulario-seccion" id="agregar">
+
+        <div class="formulario-texto">
+
+            <span class="subtitulo">AMPLÍA TU COLECCIÓN</span>
+
+            <h2>¡Un nuevo Pokémon<br><span>te espera!</span></h2>
+
+            <p>
+                Registra un nuevo integrante para tu colección
+                y continúa tu aventura Pokémon.
+            </p>
+
+            <div class="decoracion-form">
+                ⚡ POKÉMON WORLD
+            </div>
+
+        </div>
+
+
+        <div class="formulario-card">
+
+            <h2>Registrar Pokémon</h2>
+
+            <p>Completa la información de tu nuevo Pokémon.</p>
+
+            <form method="POST" action="{% url 'index' %}">
+
+                {% csrf_token %}
+
+                {% if formulario.errors %}
+                    <div class="errores">
+                        {{ formulario.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="campo">
+                    <label>Nombre</label>
+                    {{ formulario.nombre }}
+                </div>
+
+                <div class="campo">
+                    <label>Peso (kg)</label>
+                    {{ formulario.peso }}
+                </div>
+
+                <div class="campo">
+                    <label>Imagen (URL)</label>
+                    {{ formulario.imagen }}
+                </div>
+
+                <div class="campo">
+                    <label>Habilidad</label>
+                    {{ formulario.habilidades }}
+                </div>
+
+                <div class="campo">
+                    <label>Naturaleza</label>
+                    {{ formulario.naturaleza }}
+                </div>
+
+                <div class="campo">
+                    <label>Descripción</label>
+                    {{ formulario.descripcion }}
+                </div>
+
+                <div class="campo">
+                    <label>Entrenador</label>
+                    {{ formulario.entrenador }}
+                </div>
+
+                <button type="submit" class="btn-guardar">
+                    ⚡ Registrar Pokémon
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>POKÉMON<span>WORLD</span></h2>
+
+        <p>Tu aventura Pokémon comienza aquí.</p>
+
+        <small>© 2026 Pokémon World | Proyecto Django</small>
+
+    </footer>
+
+</body>
+</html>

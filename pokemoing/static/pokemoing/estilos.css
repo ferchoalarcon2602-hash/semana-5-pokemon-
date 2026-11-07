@@ -1,0 +1,721 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --fondo: #0b0b16;
+    --panel: #151528;
+    --morado: #8b5cf6;
+    --azul: #38bdf8;
+    --amarillo: #facc15;
+    --blanco: #ffffff;
+    --gris: #a1a1b5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--fondo);
+    color: var(--blanco);
+    font-family: 'Outfit', sans-serif;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 85px;
+    padding: 0 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #10101e;
+    border-bottom: 1px solid #27273d;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo span,
+footer h2 span {
+    color: var(--amarillo);
+}
+
+.navbar nav {
+    display: flex;
+    gap: 35px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #b5b5c8;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.activo {
+    color: var(--amarillo);
+}
+
+.btn-nav {
+    background: var(--morado);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.btn-nav:hover {
+    background: #a78bfa;
+    transform: translateY(-3px);
+}
+
+
+/* PORTADA */
+
+.hero {
+    min-height: 450px;
+    margin: 35px 8%;
+    border-radius: 25px;
+    padding: 65px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 80% 50%, #5530a4 0%, transparent 35%),
+        linear-gradient(120deg, #211344, #172b55);
+}
+
+.hero-texto {
+    max-width: 520px;
+    z-index: 2;
+}
+
+.etiqueta {
+    color: var(--amarillo);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 6vw, 75px);
+    line-height: .98;
+    margin: 22px 0;
+    font-weight: 900;
+}
+
+.hero h1 span {
+    color: var(--amarillo);
+}
+
+.hero p {
+    color: #d0cce4;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 30px;
+}
+
+.btn-principal {
+    display: inline-block;
+    background: var(--amarillo);
+    color: #171329;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.btn-principal:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px #facc1540;
+}
+
+.hero-imagen {
+    width: 350px;
+    z-index: 2;
+}
+
+.hero-imagen img {
+    width: 100%;
+    filter: drop-shadow(0 15px 30px #00000080);
+    animation: flotar 3s ease-in-out infinite;
+}
+
+.decoracion {
+    position: absolute;
+    right: 3%;
+    bottom: -20px;
+    font-size: 100px;
+    font-weight: 900;
+    color: #ffffff08;
+}
+
+@keyframes flotar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+
+/* ESTADISTICAS */
+
+.estadisticas {
+    margin: 0 8%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--panel);
+    border: 1px solid #292941;
+    padding: 23px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: .3s;
+}
+
+.stat-card:hover {
+    border-color: var(--morado);
+    transform: translateY(-4px);
+}
+
+.stat-card span {
+    font-size: 35px;
+}
+
+.stat-card h2 {
+    font-size: 28px;
+    color: var(--amarillo);
+}
+
+.stat-card p {
+    color: var(--gris);
+    font-size: 13px;
+}
+
+
+/* COLECCION */
+
+.contenido {
+    margin: 100px 8%;
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.subtitulo {
+    color: var(--azul);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.titulo-seccion h2 {
+    font-size: 38px;
+    margin: 10px 0;
+}
+
+.titulo-seccion h2 span {
+    color: var(--amarillo);
+}
+
+.titulo-seccion p {
+    color: var(--gris);
+    font-size: 14px;
+}
+
+.btn-agregar {
+    background: #292044;
+    border: 1px solid var(--morado);
+    padding: 14px 22px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.btn-agregar:hover {
+    background: var(--morado);
+}
+
+
+/* TARJETAS */
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.pokemon-card {
+    background: var(--panel);
+    border: 1px solid #292941;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: .35s;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-9px);
+    border-color: var(--morado);
+    box-shadow: 0 15px 35px #00000060;
+}
+
+.card-imagen {
+    height: 230px;
+    background:
+        radial-gradient(circle, #8b5cf650, transparent 65%),
+        #20203b;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-imagen img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    transition: .4s;
+    filter: drop-shadow(0 10px 10px #00000060);
+}
+
+.pokemon-card:hover .card-imagen img {
+    transform: scale(1.12) rotate(-5deg);
+}
+
+.numero {
+    position: absolute;
+    top: 15px;
+    left: 17px;
+    color: #a5a5c0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tipo {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 7px 12px;
+    border-radius: 30px;
+    background: var(--morado);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.card-info {
+    padding: 22px;
+}
+
+.card-info h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.habilidad {
+    color: var(--amarillo);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.descripcion {
+    color: var(--gris);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+.card-datos {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid #303047;
+    margin-top: 20px;
+    padding-top: 15px;
+}
+
+.card-datos div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.card-datos small {
+    color: #85859f;
+    font-size: 10px;
+}
+
+.card-datos strong {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 60px 20px;
+}
+
+.vacio h2 {
+    color: var(--amarillo);
+    margin-bottom: 15px;
+}
+
+.vacio p {
+    color: var(--gris);
+}
+
+
+/* FORMULARIO */
+
+.formulario-seccion {
+    background: linear-gradient(120deg, #19112f, #151f3b);
+    padding: 80px 10%;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.formulario-texto h2 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 20px 0;
+}
+
+.formulario-texto h2 span {
+    color: var(--amarillo);
+}
+
+.formulario-texto p {
+    color: #aaaac2;
+    line-height: 1.8;
+    max-width: 350px;
+}
+
+.decoracion-form {
+    color: #ffffff18;
+    font-size: 35px;
+    font-weight: 900;
+    margin-top: 50px;
+}
+
+.formulario-card {
+    background: #171729;
+    border: 1px solid #39304f;
+    border-radius: 22px;
+    padding: 35px;
+}
+
+.formulario-card h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.formulario-card > p {
+    color: var(--gris);
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.campo {
+    margin-bottom: 17px;
+}
+
+.campo label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #d7d4e8;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    background: #222239;
+    border: 1px solid #393952;
+    border-radius: 9px;
+    padding: 13px;
+    color: white;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--morado);
+    box-shadow: 0 0 0 3px #8b5cf625;
+}
+
+.campo select option {
+    background: #222239;
+}
+
+.btn-guardar {
+    width: 100%;
+    border: none;
+    padding: 16px;
+    background: linear-gradient(90deg, #8b5cf6, #5b7cfa);
+    color: white;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-guardar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px #8b5cf650;
+}
+
+.errores {
+    color: #fca5a5;
+    background: #7f1d1d30;
+    border: 1px solid #ef4444;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.mensaje {
+    background: #14532d;
+    color: #bbf7d0;
+    border: 1px solid #22c55e;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #090912;
+    text-align: center;
+    padding: 45px 20px;
+    border-top: 1px solid #25253a;
+}
+
+footer h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: var(--gris);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+footer small {
+    color: #66667e;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 20px 5%;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .navbar nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .hero {
+        margin: 25px 5%;
+        padding: 45px 6%;
+    }
+
+    .hero-imagen {
+        width: 240px;
+    }
+
+    .estadisticas {
+        margin: 0 5%;
+    }
+
+    .contenido {
+        margin: 75px 5%;
+    }
+
+    .pokemon-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .formulario-seccion {
+        padding: 65px 5%;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .btn-nav {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-imagen {
+        width: 200px;
+        margin-top: 25px;
+    }
+
+    .estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-seccion {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pokemon-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-seccion {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-texto h2 {
+        font-size: 38px;
+    }
+
+    .formulario-card {
+        padding: 23px;
+    }
+}
+
+
+
+
+
+/* TARJETAS DE ENTRENADORES */
+
+.entrenador-imagen {
+    background: linear-gradient(135deg, #173b5b, #35215d);
+}
+
+.icono-entrenador {
+    font-size: 85px;
+    filter: drop-shadow(0 10px 15px #00000070);
+}
+
+
+/* TARJETAS DE GIMNASIOS */
+
+.gimnasio-imagen {
+    background: linear-gradient(135deg, #49331d, #6b2860);
+}
+
+.icono-gimnasio {
+    font-size: 85px;
+    filter: drop-shadow(0 10px 15px #00000070);
+}
+
+
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.campo-formulario label {
+    color: white;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.campo-formulario input,
+.campo-formulario select,
+.campo-formulario textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #777;
+    border-radius: 8px;
+    background: #1a1a1d;
+    color: white;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.campo-formulario input[type="file"] {
+    cursor: pointer;
+}
+
+.campo-formulario input:focus,
+.campo-formulario select:focus,
+.campo-formulario textarea:focus {
+    outline: 2px solid #ba55ff;
+}
+
+.crud-form-section form {
+    max-width: 600px;
+    margin: auto;
+}

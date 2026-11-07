@@ -1,0 +1,108 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon | Pokémon World</title>
+    <link rel="stylesheet" href="{% static 'pokemoing/estilos.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="{% url 'index' %}" class="logo">POKÉMON<span>WORLD</span></a>
+
+    <nav>
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'pokemo' %}" class="activo">Pokémon</a>
+        <a href="{% url 'entrenadores' %}">Entrenadores</a>
+        <a href="{% url 'gimnasios' %}">Gimnasios</a>
+    </nav>
+</header>
+
+<main class="contenido">
+
+    <div class="titulo-seccion">
+        <div>
+            <span class="subtitulo">TU COLECCIÓN</span>
+            <h2>Mis Pokémon ⚡</h2>
+            <p>Administra todos los Pokémon registrados.</p>
+        </div>
+
+        <a href="{% url 'crear_pokemon' %}" class="btn-agregar">
+            + Agregar Pokémon
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for mensaje in messages %}
+            <div class="mensaje">{{ mensaje }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="pokemon-grid">
+
+        {% for objeto in objetos %}
+
+        <article class="pokemon-card">
+
+            <div class="card-imagen">
+
+                <span class="numero">#{{ objeto.pk }}</span>
+
+                <span class="tipo">
+                    {{ objeto.get_naturaleza_display }}
+                </span>
+
+                <img src="{{ objeto.imagen.url }}" alt="{{ objeto.nombre }}">
+
+            </div>
+
+            <div class="card-info">
+
+                <h3>{{ objeto.nombre }}</h3>
+
+                <p class="habilidad">{{ objeto.habilidades }}</p>
+
+                <p class="descripcion">{{ objeto.descripcion }}</p>
+
+                <div class="card-datos">
+                    <div>
+                        <small>PESO</small>
+                        <strong>{{ objeto.peso }} kg</strong>
+                    </div>
+
+                    <div>
+                        <small>ENTRENADOR</small>
+                        <strong>{{ objeto.entrenador.nombre }}</strong>
+                    </div>
+                </div>
+
+                <div class="acciones">
+                    <a href="{% url 'editar_pokemon' objeto.pk %}"
+                       class="btn-editar">Editar</a>
+
+                    <a href="{% url 'eliminar_pokemon' objeto.pk %}"
+                       class="btn-borrar">Eliminar</a>
+                </div>
+
+            </div>
+
+        </article>
+
+        {% empty %}
+
+        <div class="vacio">
+            <h2>⚡ No tienes Pokémon todavía</h2>
+            <p>Agrega tu primer Pokémon para comenzar.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>
